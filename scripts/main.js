@@ -12,7 +12,7 @@ $(document).ready(function () {
             url: encodeURI(tempURL),
             dataType: 'json',
             beforeSend:function(){
-                $('#res').html('carregando...')
+                $('#res').html('loading...')
             },
             success: function (data) {
 
