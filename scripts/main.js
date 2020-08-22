@@ -105,28 +105,79 @@ $(document).ready(function () {
         let speedWindKmH = (wheatherDatas.wind.speed*1.6093).toFixed(1)
 
         $('#res').html(`
+       
         <hr>
-        <div id="result">
-            <span><h3>${wheatherDatas.name}</h3> <h4>Temperature now: ${kTemp} ºK ${fTemp} ºF ${cTemp} ºC </h4></span>
-            
-            <p>latitude: ${wheatherDatas.coord.lat}</p>
+        <!-- start-->
+        <div class="container" id="result" style="border: solid 5px #FFFFFF;">
+            <div class="row">
+                <div class="col-sm" style="background-color:#d6d627;">
+                    <h1>
+                        <i class="fas fa-city"></i>
+                        ${wheatherDatas.name}
+                    </h1>
+                    <h5><i class="far fa-calendar-alt"></i>
+                        ${localDate}
+                    </h5>
+                </div>
+                <div class="col-sm" style="background-color:#325aa8;">
+                    <h4>
+                        <i class="fas fa-thermometer-half"></i>
+                        Temperature now:<br> ${kTemp} ºK | ${fTemp} ºF | ${cTemp} ºC
+                    </h4>
+                </div>
+            </div>
         
-            <p>longitude: ${wheatherDatas.coord.lon}</p>
-
-            date: ${localDate}
-
-            <p>Min. temp: ${kMin} ºK ${fMin} ºF ${cMin} ºC</p>
-
-            <p>Max. temp: ${kMax} ºK ${fMax} ºF ${cMax} ºC</p>
-            Wind: ${speedWindKmH}Km/h
-            Humidity: ${wheatherDatas.main.humidity}%
-
-            Pressure: ${wheatherDatas.main.pressure}mmHg
+            <div class="row">
+                <div class="col-sm" style="background-color:#0eab1b;">
+                    <h6>
+                        <i class="fas fa-thermometer-quarter"></i>
+                        Min. temp:<br>
+                        ${kMin} | ºK ${fMin} | ºF ${cMin} ºC
+                    </h6>
+                </div>
+                <div class="col-sm" style="background-color:#d64b91;">
+                    <h6>
+                        <i class="fas fa-wind"></i>
+                        Wind:<br>
+                        ${speedWindKmH}Km/h
+                    </h6>
+                </div>
+                <div class="col-sm" style="background-color:#1b965f;">
+                    <h6>
+                        Latitude/Longitude:<br>
+                        ${wheatherDatas.coord.lat}º/${wheatherDatas.coord.lon}º
+                    </h6>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-sm" style="background-color:#0eab1b;">
+                    <h6>
+                        <i class="fas fa-temperature-high"></i>
+                        Max. temp:<br>
+                        ${kMax} | ºK ${fMax} | ºF ${cMax} ºC
+                    </h6>
+                </div>
+                <div class="col-sm" style="background-color:#d64b91;">
+                    <h6>
+                        <i class="fas fa-tint"></i>
+                        Humidity:<br>
+                        ${wheatherDatas.main.humidity}%
+                    </h6>
+                </div>
+                <div class="col-sm" style="background-color:#1b965f;">
+                    <h6>
+                        Pressure:<br>
+                        ${wheatherDatas.main.pressure}mmHg
+                    </h6>
+                </div>
+            </div>
         </div>
-            
+        <!-- end-->
+        
         `)
 
-        $('#local').val('')
+            $('#local').val('')
 
     }
 })
