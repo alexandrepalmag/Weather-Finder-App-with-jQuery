@@ -2,29 +2,20 @@ $(document).ready(function () {
     $('button').on('click', function () {
         
         let local = $('#local').val()
-        let nowDate = new Date()
-        let tempURL = 'https://query.yahooapis.com/v1/public/yql?format=json&rnd='+ nowDate.getFullYear()
-         + nowDate.getMonth() + nowDate.getDay() + nowDate.getHours() + 
-         '&diagnostics=true&callback=?&q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="'+local+'") and u="c"'
-
+        let apiK = 'c784ca36b94410b176d76a3e5a0680ce'
+       
         $.ajax({
             type: 'GET',
-            url: encodeURI(tempURL),
+            url: `http://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${apiK}`,
             dataType: 'json',
             beforeSend:function(){
                 $('#res').html('loading...')
             },
-            success: function (data) {
-
-                if(data !== null && data.query !== null && 
-                    data.query.results !== null && 
-                    data.query.results.channel.description !== 'YAHOO! Weather Error') {
-
-                        let temp = data.query.results.channel.item.condition.temp
-
-                        $('#res').html(temp+'º C')
-
-                    }
+            success: function (response) {
+                console.log(response)
+                $('#res').html(`${response.name}`)
+                $('input').val('')
+                
             },
             error:function(){
                 $('#res').html('Erro')
