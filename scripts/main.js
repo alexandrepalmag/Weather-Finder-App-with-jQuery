@@ -118,9 +118,7 @@ $(document).ready(function () {
             <p>Min. temp: ${kMin} ºK ${fMin} ºF ${cMin} ºC</p>
 
             <p>Max. temp: ${kMax} ºK ${fMax} ºF ${cMax} ºC</p>
-
             Wind: ${speedWindKmH}Km/h
-
             Humidity: ${wheatherDatas.main.humidity}%
 
             Pressure: ${wheatherDatas.main.pressure}mmHg
