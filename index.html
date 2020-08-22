@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherFinder</title>
+    <link href="lib/fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
@@ -23,13 +24,21 @@
         <div class="card cardbody-person">
             <div class="card-body cardbody-person">
                 <form>
-                    <input type="text" placeholder="Type the local" class="form-control" id="local" required>
-                    <br>
-                    <button class="btn btn-secondary">Search</button>
+                    <div class="input-group mb-3 input-group-lg" style="margin-top: 10px;">
+                        <input type="text" placeholder="Type the City" class="form-control" id="local" required>
+                        <div class="input-group-append input-group-lg" id="button-addon4">
+                            <button class="btn btn-secondary">
+                                <span><i class="fas fa-search"></i></span>
+                                Search
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div id="res"></div>
         </div>
+    </div>
+    <div class="container" id="res"></div>
+    </div>
     </div>
 </body>
 <script src="lib/jquery/jquery.min.js"></script>

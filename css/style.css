@@ -38,4 +38,9 @@ nav.navbar-transparent {
     url('../img/ruido.png'),
     linear-gradient(50deg,rgb(101, 178, 180),rgb(94, 94, 126));
     border: none;
+    border-radius: 0.5rem;
+}
+#result {
+    background: rgba(0, 0, 0, 0.48);
+    height: 250px;
 }

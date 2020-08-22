@@ -15,12 +15,13 @@ $(document).ready(function () {
                 beforeSend: function () {
 
                     $('#res').html(`
-                        <div class="alert alert-light" role="alert" id="loading" style="width: 96%;margin-left:2%">
-                            <h5>Searching...</>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                        <br>
+                            <div class="alert alert-light" role="alert" id="loading" style="width: 96%;margin-left:2%">
+                                <h5>Searching...</>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                </div>
                             </div>
-                        </div>
                 `)
 
                 },
@@ -51,6 +52,7 @@ $(document).ready(function () {
                 }
             });
         } else {
+
             Swal.fire({
                 title: 'Enter the name of the city!',
                 showClass: {
@@ -69,7 +71,7 @@ $(document).ready(function () {
     })
 
     function dataProcessing(wheatherDatas) {
-
+        console.log(wheatherDatas)
         /*Date
         =====================================
         */
@@ -84,7 +86,6 @@ $(document).ready(function () {
         let kMin = wheatherDatas.main.temp_min
         let kMax = wheatherDatas.main.temp_max
         let kTemp = wheatherDatas.main.temp
-        /* --------------------------------- */
 
         //Kelvin to Celsius
         let kelvinToCelsius = (k) => {return (k-273.15).toFixed(1)}
@@ -100,18 +101,34 @@ $(document).ready(function () {
         let fMax = kelvinToFahrenheit(kMax)
         let fTemp = kelvinToFahrenheit(kTemp)
 
+        //Mph to KM/h
+        let speedWindKmH = (wheatherDatas.wind.speed*1.6093).toFixed(1)
+
         $('#res').html(`
+        <hr>
+        <div id="result">
             <span><h3>${wheatherDatas.name}</h3> <h4>Temperature now: ${kTemp} ºK ${fTemp} ºF ${cTemp} ºC </h4></span>
             
-            ${wheatherDatas.coord.lat}
-            ${wheatherDatas.coord.lon}
-            ${localDate}
-            Min. temp: ${kMin} ºK ${fMin} ºF ${cMin} ºC 
-            Max. temp: ${kMax} ºK ${fMax} ºF ${cMax} ºC 
+            <p>latitude: ${wheatherDatas.coord.lat}</p>
+        
+            <p>longitude: ${wheatherDatas.coord.lon}</p>
+
+            date: ${localDate}
+
+            <p>Min. temp: ${kMin} ºK ${fMin} ºF ${cMin} ºC</p>
+
+            <p>Max. temp: ${kMax} ºK ${fMax} ºF ${cMax} ºC</p>
+
+            Wind: ${speedWindKmH}Km/h
+
+            Humidity: ${wheatherDatas.main.humidity}%
+
+            Pressure: ${wheatherDatas.main.pressure}mmHg
+        </div>
             
         `)
 
-
         $('#local').val('')
+
     }
 })
