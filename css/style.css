@@ -30,7 +30,7 @@ nav.navbar-transparent {
 
 /* body */
 .personContainer {
-    margin-top: 10.08rem;
+    margin-top: 7.98rem;
 }
 /* cards */
 .cardbody-person {
@@ -42,6 +42,7 @@ nav.navbar-transparent {
 }
 #result {
     background: rgba(0, 0, 0, 0.48);
-    height: 250px;
-    padding: 2rem;
+    height: 280px;
+    padding: 1rem;
+    margin-top: 2.08rem;
 }

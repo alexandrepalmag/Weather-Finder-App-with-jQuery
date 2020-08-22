@@ -70,12 +70,12 @@ $(document).ready(function () {
 
     })
 
-    function dataProcessing(wheatherDatas) {
-        console.log(wheatherDatas)
+    function dataProcessing(weatherDatas) {
+        console.log(weatherDatas)
         /*Date
         =====================================
         */
-        let date = new Date(wheatherDatas.dt * 1000)
+        let date = new Date(weatherDatas.dt * 1000)
         let localDate = date.toLocaleDateString()
 
         /*temperature
@@ -83,9 +83,9 @@ $(document).ready(function () {
         */
 
         //Kelvin Temperature
-        let kMin = wheatherDatas.main.temp_min
-        let kMax = wheatherDatas.main.temp_max
-        let kTemp = wheatherDatas.main.temp
+        let kMin = weatherDatas.main.temp_min
+        let kMax = weatherDatas.main.temp_max
+        let kTemp = weatherDatas.main.temp
 
         //Kelvin to Celsius
         let kelvinToCelsius = (k) => {return (k-273.15).toFixed(1)}
@@ -102,73 +102,76 @@ $(document).ready(function () {
         let fTemp = kelvinToFahrenheit(kTemp)
 
         //Mph to KM/h
-        let speedWindKmH = (wheatherDatas.wind.speed*1.6093).toFixed(1)
+        let speedWindKmH = (weatherDatas.wind.speed*1.6093).toFixed(1)
 
         $('#res').html(`
        
-        <hr>
+     
         <!-- start-->
-        <div class="container" id="result" style="border: solid 5px #FFFFFF;">
+        <div class="container" id="result" style="color:#FFFFFF;">
             <div class="row">
-                <div class="col-sm" style="background-color:#d6d627;">
-                    <h1>
+                <div class="col-sm">
+                    <h2 style="color:rgba(0, 123, 255, 0.8);">
                         <i class="fas fa-city"></i>
-                        ${wheatherDatas.name}
-                    </h1>
+                        ${weatherDatas.name}
+                    </h2>
                     <h5><i class="far fa-calendar-alt"></i>
                         ${localDate}
                     </h5>
                 </div>
-                <div class="col-sm" style="background-color:#325aa8;">
-                    <h4>
+                <div class="col-sm">
+                    <h4 style="color:rgba(0, 123, 255, 0.8);>
                         <i class="fas fa-thermometer-half"></i>
-                        Temperature now:<br> ${kTemp} ºK | ${fTemp} ºF | ${cTemp} ºC
+                        Temperature now:<br>
                     </h4>
+                    <h5>
+                        ${kTemp} ºK | ${fTemp} ºF | ${cTemp} ºC
+                    </h5>
                 </div>
             </div>
-        
+            <hr style="background:rgba(101, 178, 180, 0.8);height: 0.005rem; border: none;">
             <div class="row">
-                <div class="col-sm" style="background-color:#0eab1b;">
+                <div class="col-sm">
                     <h6>
                         <i class="fas fa-thermometer-quarter"></i>
                         Min. temp:<br>
                         ${kMin} | ºK ${fMin} | ºF ${cMin} ºC
                     </h6>
                 </div>
-                <div class="col-sm" style="background-color:#d64b91;">
+                <div class="col-sm">
                     <h6>
                         <i class="fas fa-wind"></i>
                         Wind:<br>
-                        ${speedWindKmH}Km/h
+                        ${speedWindKmH} Km/h
                     </h6>
                 </div>
-                <div class="col-sm" style="background-color:#1b965f;">
+                <div class="col-sm">
                     <h6>
                         Latitude/Longitude:<br>
-                        ${wheatherDatas.coord.lat}º/${wheatherDatas.coord.lon}º
+                        ${weatherDatas.coord.lat}º/${weatherDatas.coord.lon}º
                     </h6>
                 </div>
             </div>
         
             <div class="row">
-                <div class="col-sm" style="background-color:#0eab1b;">
+                <div class="col-sm">
                     <h6>
                         <i class="fas fa-temperature-high"></i>
                         Max. temp:<br>
                         ${kMax} | ºK ${fMax} | ºF ${cMax} ºC
                     </h6>
                 </div>
-                <div class="col-sm" style="background-color:#d64b91;">
+                <div class="col-sm">
                     <h6>
                         <i class="fas fa-tint"></i>
                         Humidity:<br>
-                        ${wheatherDatas.main.humidity}%
+                        ${weatherDatas.main.humidity}%
                     </h6>
                 </div>
-                <div class="col-sm" style="background-color:#1b965f;">
+                <div class="col-sm">
                     <h6>
                         Pressure:<br>
-                        ${wheatherDatas.main.pressure}mmHg
+                        ${weatherDatas.main.pressure} mmHg
                     </h6>
                 </div>
             </div>
