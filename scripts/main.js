@@ -15,12 +15,12 @@ $(document).ready(function () {
                 beforeSend: function () {
 
                     $('#res').html(`
-                <div class="alert alert-light" role="alert" id="loading" style="width: 96%;margin-left:2%">
-                    <h5>Searching...</>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 88%;"></div>
-                    </div>
-                </div>
+                        <div class="alert alert-light" role="alert" id="loading" style="width: 96%;margin-left:2%">
+                            <h5>Searching...</>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                            </div>
+                        </div>
                 `)
 
                 },
@@ -30,7 +30,7 @@ $(document).ready(function () {
 
                         dataProcessing(response)
 
-                    }, 1500);
+                    }, 1200);
 
                 },
                 error: function () {
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
                         $('#local').val('')
 
-                    }, 1500);
+                    }, 1200);
                 }
             });
         } else {
@@ -70,28 +70,45 @@ $(document).ready(function () {
 
     function dataProcessing(wheatherDatas) {
 
-        /*Date cover
+        /*Date
         =====================================
         */
-        console.log(wheatherDatas)
         let date = new Date(wheatherDatas.dt * 1000)
         let localDate = date.toLocaleDateString()
 
-        /*temperature convert
+        /*temperature
         =====================================
         */
 
-        //Kelvin to Celsius
+        //Kelvin Temperature
+        let kMin = wheatherDatas.main.temp_min
+        let kMax = wheatherDatas.main.temp_max
+        let kTemp = wheatherDatas.main.temp
+        /* --------------------------------- */
 
+        //Kelvin to Celsius
+        let kelvinToCelsius = (k) => {return (k-273.15).toFixed(1)}
+
+        let cMin = kelvinToCelsius(kMin)
+        let cMax = kelvinToCelsius(kMax)
+        let cTemp = kelvinToCelsius(kTemp)
+
+        //Kelvin to Fahrenheit
+        let kelvinToFahrenheit = (k) => {return (((k-273.15)*(9/5))+32).toFixed(1)}
+
+        let fMin = kelvinToFahrenheit(kMin)
+        let fMax = kelvinToFahrenheit(kMax)
+        let fTemp = kelvinToFahrenheit(kTemp)
 
         $('#res').html(`
-            ${wheatherDatas.name}
+            <span><h3>${wheatherDatas.name}</h3> <h4>Temperature now: ${kTemp} ºK ${fTemp} ºF ${cTemp} ºC </h4></span>
+            
             ${wheatherDatas.coord.lat}
             ${wheatherDatas.coord.lon}
             ${localDate}
-            ${wheatherDatas.main.temp}
-            ${wheatherDatas.main.temp_max}
-            ${wheatherDatas.main.temp_min}
+            Min. temp: ${kMin} ºK ${fMin} ºF ${cMin} ºC 
+            Max. temp: ${kMax} ºK ${fMax} ºF ${cMax} ºC 
+            
         `)
 
 
